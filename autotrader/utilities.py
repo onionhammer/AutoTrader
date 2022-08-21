@@ -107,7 +107,19 @@ def get_config(environment: str, global_config: dict, feed: str) -> dict:
                            'STARK_KEYS': global_config['STARK_KEYS'],
                            'ETH_ADDR': eth_address,
                            'ETH_PRIV_KEY': eth_private_key}
-            
+        
+        elif feed.upper() == 'ALPACA':
+            data_source = 'YAHOO' # TODO Implement alpaca data source
+            endpoint = global_config['ENDPOINT'] if 'ENDPOINT' in global_config else 'https://paper-api.alpaca.markets'
+            api_key  = global_config['API_KEY'] if 'API_KEY' in global_config else None
+            secret_key = global_config['SECRET_KEY'] if 'SECRET_KEY' in global_config else None
+            config_dict = {
+                'data_source': data_source,
+                'ENDPOINT': endpoint,
+                'API_KEY': api_key,
+                'SECRET_KEY': secret_key
+            }
+
         elif feed.upper() == 'YAHOO':
             data_source = 'yfinance'
             config_dict = {'data_source': data_source}
@@ -148,7 +160,19 @@ def get_config(environment: str, global_config: dict, feed: str) -> dict:
             
         elif feed.upper() == 'DYDX':
             raise Exception("Paper trading is not supported for dYdX.")
-            
+
+        elif feed.upper() == 'ALPACA':
+            data_source = 'YAHOO' # TODO Implement alpaca data source
+            endpoint = global_config['ENDPOINT'] if 'ENDPOINT' in global_config else 'https://api.alpaca.markets'
+            api_key  = global_config['API_KEY'] if 'API_KEY' in global_config else None
+            secret_key = global_config['SECRET_KEY'] if 'SECRET_KEY' in global_config else None
+            config_dict = {
+                'data_source': data_source,
+                'ENDPOINT': endpoint,
+                'API_KEY': api_key,
+                'SECRET_KEY': secret_key
+            }
+
         elif feed.upper() == 'YAHOO':
             data_source = 'yfinance'
             config_dict = {'data_source': data_source}
